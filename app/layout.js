@@ -14,7 +14,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata = {
-  title: 'RadPilot – Your Guide in Radiology Education',
+  title: 'RadYar – Your Guide in Radiology Education',
   description:
     'Strukturiertes Wissen, klinische Fälle und Prüfungsvorbereitung für Radiologinnen und Radiologen in Weiterbildung.',
 }
