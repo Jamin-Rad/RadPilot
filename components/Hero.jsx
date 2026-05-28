@@ -1,26 +1,17 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/providers/LanguageProvider'
 import styles from './Hero.module.css'
 
-// Logo B: Hexagonal emblem (same as navbar)
-function HexLogoLarge() {
+function HexLogo({ size = 54 }) {
   return (
-    <svg className={styles.wmIcon} viewBox="0 0 54 54" fill="none">
-      <polygon
-        points="27,2 49,14.5 49,39.5 27,52 5,39.5 5,14.5"
-        stroke="url(#hwg)" strokeWidth="2.2" fill="rgba(249,115,22,0.08)"
-      />
-      <polygon
-        points="27,11 41,19 41,35 27,43 13,35 13,19"
-        stroke="url(#hwg)" strokeWidth="1.2" fill="none" opacity="0.4"
-      />
-      <text
-        x="27" y="33" textAnchor="middle"
-        fill="url(#hwg)" fontSize="16" fontWeight="800"
-        fontFamily="'Syne','Segoe UI',system-ui,sans-serif"
-      >RY</text>
+    <svg width={size} height={size} viewBox="0 0 54 54" fill="none">
+      <polygon points="27,2 49,14.5 49,39.5 27,52 5,39.5 5,14.5"
+        stroke="url(#hwg)" strokeWidth="2.2" fill="rgba(249,115,22,0.1)"/>
+      <polygon points="27,11 41,19 41,35 27,43 13,35 13,19"
+        stroke="url(#hwg)" strokeWidth="1.2" fill="none" opacity="0.4"/>
+      <text x="27" y="33" textAnchor="middle" fill="url(#hwg)"
+        fontSize="16" fontWeight="800" fontFamily="'Syne',system-ui,sans-serif">RY</text>
       <defs>
         <linearGradient id="hwg" x1="0" y1="0" x2="54" y2="54" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#f97316"/>
@@ -37,66 +28,62 @@ export default function Hero() {
   return (
     <section className={styles.hero}>
 
-      {/* Background image – brighter, more visible */}
-      <div className={styles.heroBgWrap}>
-        <Image
-          src="/hero.png"
-          alt="MRI Scanner"
-          fill
-          style={{ objectFit: 'cover', filter: 'brightness(0.52) saturate(1.15)' }}
-          priority
-        />
+      {/* Background image */}
+      <div className={styles.bg} id="heroBg" />
+
+      {/* Animated overlay layers */}
+      <div className={styles.overlay} />
+
+      {/* Animated scan lines */}
+      <div className={styles.scanLines} />
+
+      {/* Floating particles */}
+      <div className={styles.particles}>
+        {[...Array(12)].map((_, i) => (
+          <div key={i} className={styles.particle}
+            style={{ '--i': i, '--x': `${10 + (i * 7.3) % 80}%`, '--d': `${i * 0.4}s`, '--s': `${4 + (i % 4)}s` }} />
+        ))}
       </div>
 
-      {/* Subtle gradient – only left side dark for text, right stays open */}
-      <div className={styles.heroOverlay} />
-
-      {/* Orange glow orbs */}
-      <div className={styles.orbOrange} />
-      <div className={styles.orbAmber} />
+      {/* MRI bore glow ring */}
+      <div className={styles.boreGlow} />
 
       {/* Content */}
-      <div className={styles.heroContent}>
-
-        {/* Wordmark with hex logo */}
+      <div className={styles.content}>
         <div className={styles.wordmark}>
-          <HexLogoLarge />
-          <div className={styles.wmTextBlock}>
-            <span className={styles.wmText}>
+          <HexLogo size={56} />
+          <div className={styles.wmText}>
+            <span className={styles.wmTitle}>
               <span className={styles.wmRad}>RAD</span>
               <span className={styles.wmYar}>YAR</span>
             </span>
-            <span className={styles.wmSub}>{texts.hs || 'Radiology Education'}</span>
+            <span className={styles.wmSub}>{texts.heroSub || 'Radiology Education'}</span>
           </div>
         </div>
 
-        <p className={styles.heroTagline}>{texts.tagline}</p>
-        <div className={styles.heroBar} />
-        <p className={styles.heroDesc}>{texts.heroDesc}</p>
+        <p className={styles.tagline}>{texts.tagline}</p>
+        <div className={styles.bar} />
+        <p className={styles.desc}>{texts.heroDesc}</p>
 
-        {/* Stats */}
-        <div className={styles.statsRow}>
-          <span className={styles.statChip}>
-            <span className={styles.statDot} style={{ background: '#f97316' }} />
-            {texts.stat1}
-          </span>
-          <span className={styles.statChip}>
-            <span className={styles.statDot} style={{ background: '#fbbf24' }} />
-            {texts.stat2}
-          </span>
-          <span className={styles.statChip}>
-            <span className={styles.statDot} style={{ background: '#34d399' }} />
-            {texts.stat3}
-          </span>
+        <div className={styles.stats}>
+          {[
+            { dot: '#f97316', text: texts.stat1 },
+            { dot: '#fbbf24', text: texts.stat2 },
+            { dot: '#34d399', text: texts.stat3 },
+          ].map((s) => (
+            <span key={s.text} className={styles.chip}>
+              <span className={styles.dot} style={{ background: s.dot }} />
+              {s.text}
+            </span>
+          ))}
         </div>
 
-        <div className={styles.ctaRow}>
+        <div className={styles.ctas}>
           <Link href="#fachgebiete" className={styles.btnPrimary}>{texts.cta}</Link>
           <Link href="#lernpfade" className={styles.btnGhost}>
             {texts.ctaSub}
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-              <path d="M2.5 7.5h10M8 3l4.5 4.5L8 12"
-                stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </Link>
         </div>
@@ -104,8 +91,7 @@ export default function Hero() {
 
       <div className={styles.scrollHint}>
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3.5 6.5l4.5 4.5 4.5-4.5"
-            stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M3.5 6.5l4.5 4.5 4.5-4.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
     </section>
