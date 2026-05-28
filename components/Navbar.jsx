@@ -10,13 +10,19 @@ const FACH_KEYS = [
   'Hals','Brust','Becken','Technik & Physik',
 ]
 
-const FACH_ICONS = {
-  Neuroradiologie: '🧠', Thorax: '🫁', Abdomen: '🫃',
-  Muskuloskelettales: '🦴', Hals: '🫀', Brust: '🩺',
-  Becken: '⭕', 'Technik & Physik': '⚛️',
+// Link per Fachgebiet – Technik & Physik hat eigene Seite
+const FACH_LINKS = {
+  'Neuroradiologie':    '/#fachgebiete',
+  'Thorax':             '/#fachgebiete',
+  'Abdomen':            '/#fachgebiete',
+  'Muskuloskelettales': '/#fachgebiete',
+  'Hals':               '/#fachgebiete',
+  'Brust':              '/#fachgebiete',
+  'Becken':             '/#fachgebiete',
+  'Technik & Physik':   '/technik/kontrastmittel',
 }
 
-// Logo B: Hexagonal emblem with RY
+// Logo B: Hexagonal emblem
 function HexLogo({ size = 32 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 36 36" fill="none">
@@ -56,9 +62,12 @@ function FachDropdown({ texts }) {
     <div className={styles.dropdown}>
       <div className={styles.ddLabel}>{texts.navFach}</div>
       {FACH_KEYS.map((k) => (
-        <Link key={k} href="#fachgebiete" className={styles.ddItem}>
+        <Link key={k} href={FACH_LINKS[k]} className={styles.ddItem}>
           <span className={styles.ddDot} />
           {texts.fachNames[k]}
+          {k === 'Technik & Physik' && (
+            <span className={styles.ddBadge}>Neu ✓</span>
+          )}
         </Link>
       ))}
     </div>
@@ -82,10 +91,8 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Center nav links - both with dropdowns */}
+        {/* Center nav links */}
         <div className={styles.links}>
-
-          {/* Lernen dropdown */}
           <div className={styles.navItem}>
             <button className={styles.navLink}>
               {texts.navLearn} <ChevronDown />
@@ -93,14 +100,12 @@ export default function Navbar() {
             <FachDropdown texts={texts} />
           </div>
 
-          {/* Fallbeispiele/MCQs dropdown */}
           <div className={styles.navItem}>
             <button className={`${styles.navLink} ${styles.navLinkActive}`}>
               {texts.navFall} <ChevronDown />
             </button>
             <FachDropdown texts={texts} />
           </div>
-
         </div>
 
         {/* Right */}

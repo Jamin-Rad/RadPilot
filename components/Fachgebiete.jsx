@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useLanguage } from '@/providers/LanguageProvider'
 import styles from './Fachgebiete.module.css'
 
@@ -38,15 +39,27 @@ const BeckenIcon = () => (
   </svg>
 )
 
+// ── LINKS per Fachgebiet ───────────────────────────
+const FACH_LINKS = {
+  'Neuroradiologie':    '/#fachgebiete',
+  'Thorax':             '/#fachgebiete',
+  'Abdomen':            '/#fachgebiete',
+  'Muskuloskelettales': '/#fachgebiete',
+  'Hals':               '/#fachgebiete',
+  'Brust':              '/#fachgebiete',
+  'Becken':             '/#fachgebiete',
+  'Technik & Physik':   '/technik/kontrastmittel',
+}
+
 const fachData = [
-  { key: 'Neuroradiologie',    bg: 'rgba(139,92,246,0.18)',   icon: '🧠' },
-  { key: 'Thorax',             bg: 'rgba(56,189,248,0.18)',    icon: '🫁' },
-  { key: 'Abdomen',            bg: 'rgba(52,211,153,0.18)',    icon: <AbdomenIcon /> },
-  { key: 'Muskuloskelettales', bg: 'rgba(251,191,36,0.18)',    icon: '🦴' },
-  { key: 'Hals',               bg: 'rgba(251,146,60,0.18)',    icon: <HalsIcon /> },
-  { key: 'Brust',              bg: 'rgba(244,114,182,0.18)',   icon: <BrustIcon /> },
-  { key: 'Becken',             bg: 'rgba(99,102,241,0.18)',    icon: <BeckenIcon /> },
-  { key: 'Technik & Physik',   bg: 'rgba(249,115,22,0.18)',    icon: '⚛️' },
+  { key: 'Neuroradiologie',    bg: 'rgba(139,92,246,0.18)',  icon: '🧠' },
+  { key: 'Thorax',             bg: 'rgba(56,189,248,0.18)',   icon: '🫁' },
+  { key: 'Abdomen',            bg: 'rgba(52,211,153,0.18)',   icon: <AbdomenIcon /> },
+  { key: 'Muskuloskelettales', bg: 'rgba(251,191,36,0.18)',   icon: '🦴' },
+  { key: 'Hals',               bg: 'rgba(251,146,60,0.18)',   icon: <HalsIcon /> },
+  { key: 'Brust',              bg: 'rgba(244,114,182,0.18)',  icon: <BrustIcon /> },
+  { key: 'Becken',             bg: 'rgba(99,102,241,0.18)',   icon: <BeckenIcon /> },
+  { key: 'Technik & Physik',   bg: 'rgba(249,115,22,0.18)',   icon: '⚛️' },
 ]
 
 export default function Fachgebiete() {
@@ -58,15 +71,23 @@ export default function Fachgebiete() {
       <p className="sSub">{texts.section2Sub}</p>
       <div className={styles.grid}>
         {fachData.map((f) => (
-          <div key={f.key} className={styles.card}>
+          <Link
+            key={f.key}
+            href={FACH_LINKS[f.key]}
+            className={styles.card}
+          >
             <div className={styles.iconWrap} style={{ background: f.bg }}>
               {typeof f.icon === 'string' ? <span>{f.icon}</span> : f.icon}
             </div>
             <div>
               <div className={styles.name}>{texts.fachNames[f.key]}</div>
-              <div className={styles.status}>{texts.fachStatus}</div>
+              <div className={styles.status}>
+                {f.key === 'Technik & Physik'
+                  ? '→ Kontrastmittel'
+                  : texts.fachStatus}
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
