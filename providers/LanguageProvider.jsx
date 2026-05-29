@@ -10,7 +10,8 @@ const LanguageContext = createContext({
 
 export function LanguageProvider({ children }) {
   const [lang, setLang] = useState('de')
-  const texts = translations[lang]
+  const texts = translations[lang] || translations.de
+
   return (
     <LanguageContext.Provider value={{ lang, texts, setLang }}>
       <div dir={texts.dir} lang={lang} style={{ minHeight: '100vh' }}>
