@@ -1,20 +1,16 @@
 :root {
-  /* ── FONTS ──────────────────────────────────── */
-  --font-main:    'Space Grotesk', system-ui, sans-serif;
-  --font-persian: 'IRANSans', 'Vazirmatn', 'Tahoma', sans-serif;
+  --font-display:  var(--font-fraunces), 'Georgia', serif;
+  --font-main:     var(--font-manrope), system-ui, sans-serif;
+  --font-persian:  'Vazirmatn', 'Tahoma', sans-serif;
 
-  /* ── COLORS ─────────────────────────────────── */
   --bg:        #f0f2f8;
   --bg-card:   #ffffff;
-  --bg-dark:   #16213e;
   --navy:      #1a2051;
-  --navy-mid:  #2d3a7a;
   --gray:      #64748b;
   --gray-light:#94a3b8;
   --border:    #e2e6f0;
   --orange:    #f97316;
   --amber:     #fbbf24;
-  --white:     #ffffff;
   --text:      #1a2051;
   --text-muted:#64748b;
 }
@@ -22,58 +18,46 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
-/* ── BASE FONT ────────────────────────────────── */
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-main);
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
-  font-weight: 400;
 }
 
-/* ── PERSIAN: IRANSans aktivieren ─────────────── */
-[lang="fa"] body,
+/* ── PERSIAN ──────────────────────────────────── */
 [dir="rtl"],
 [dir="rtl"] * {
   font-family: var(--font-persian) !important;
   letter-spacing: 0 !important;
+  line-height: 1.9;
   word-spacing: 2px;
-  line-height: 1.8;
 }
 
-/* ── SHARED SECTION STYLES ────────────────────── */
+/* ── SHARED ───────────────────────────────────── */
 .sLabel {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 12px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 12px;
   font-family: var(--font-main);
 }
 
 .sTitle {
-  font-family: var(--font-main);
+  font-family: var(--font-display);
+  font-style: italic;
   font-size: clamp(24px, 3.2vw, 38px);
-  font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 12px;
-  color: var(--navy);
-  letter-spacing: -0.3px;
+  font-weight: 700; line-height: 1.15;
+  margin-bottom: 12px; color: var(--navy);
 }
 
 .sSub {
-  font-size: 15px;
-  color: var(--gray);
-  line-height: 1.7;
-  max-width: 520px;
+  font-size: 15px; color: var(--gray);
+  line-height: 1.7; max-width: 520px;
   margin-bottom: 48px;
-  font-weight: 400;
 }
 
-/* ── DIVIDER ──────────────────────────────────── */
 .divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);

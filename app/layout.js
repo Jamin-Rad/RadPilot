@@ -1,10 +1,17 @@
-import { Space_Grotesk } from 'next/font/google'
+import { Fraunces, Manrope } from 'next/font/google'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-space',
+  weight: ['400', '700', '900'],
+  variable: '--font-fraunces',
+  style: ['normal', 'italic'],
+})
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-manrope',
 })
 
 export const metadata = {
@@ -17,13 +24,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="de">
       <head>
-        {/* IRANSans für persischen Text */}
         <link
+          href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap"
           rel="stylesheet"
-          href="https://fonts.cdnfonts.com/css/iran-sans"
         />
       </head>
-      <body className={spaceGrotesk.variable}>
+      <body className={`${fraunces.variable} ${manrope.variable}`}>
         {children}
       </body>
     </html>
