@@ -53,10 +53,13 @@ export default function Navbar() {
   return (
     <>
       <nav className={styles.nav}>
-        <Link href="/" className={styles.brand}>
+
+        {/* ── Logo always LTR ── */}
+        <Link href="/" className={styles.brand} dir="ltr">
           <HexLogo size={28} />
-          <span className={styles.wordmark}>
-            <span className={styles.rad}>RAD</span><span className={styles.yar}>YAR</span>
+          <span className={styles.wordmark} dir="ltr">
+            <span className={styles.rad}>RAD</span>
+            <span className={styles.yar}>YAR</span>
           </span>
         </Link>
 
@@ -88,7 +91,7 @@ export default function Navbar() {
               <line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
             </svg>
           </button>
-          <div className={styles.langToggle}>
+          <div className={styles.langToggle} dir="ltr">
             <button className={`${styles.langBtn} ${lang==='de'?styles.langOn:''}`} onClick={() => setLang('de')}>DE</button>
             <span className={styles.langSep}>·</span>
             <button className={`${styles.langBtn} ${lang==='en'?styles.langOn:''}`} onClick={() => setLang('en')}>EN</button>

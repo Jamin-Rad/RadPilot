@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useLanguage } from '@/providers/LanguageProvider'
 import styles from './Hero.module.css'
@@ -28,25 +27,10 @@ export default function Hero() {
 
   return (
     <section className={styles.hero}>
-
-      {/* ── Hero background image – using Next.js Image, always visible ── */}
-      <div className={styles.bgWrap}>
-        <Image
-          src="/hero.png"
-          alt="MRI Scanner"
-          fill
-          priority
-          style={{ objectFit: 'cover', filter: 'brightness(0.42) saturate(1.15)' }}
-        />
-      </div>
-
-      {/* ── Gradient overlay: dark left, transparent right ── */}
+      <div className={styles.bgWrap} />
       <div className={styles.overlay} />
-
-      {/* ── Animated scan lines ── */}
       <div className={styles.scanLines} />
 
-      {/* ── Floating particles ── */}
       <div className={styles.particles}>
         {[...Array(14)].map((_, i) => (
           <div key={i} className={styles.particle}
@@ -61,15 +45,14 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* ── MRI bore glow ring ── */}
       <div className={styles.boreGlow} />
 
-      {/* ── Content ── */}
       <div className={styles.content}>
 
-        <div className={styles.wordmark}>
+        {/* ── Wordmark always LTR ── */}
+        <div className={styles.wordmark} dir="ltr">
           <HexLogo />
-          <div className={styles.wmText}>
+          <div className={styles.wmText} dir="ltr">
             <span className={styles.wmTitle}>
               <span className={styles.wmRad}>RAD</span>
               <span className={styles.wmYar}>YAR</span>
@@ -95,7 +78,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className={styles.ctas}>
+        <div className={styles.ctas} dir="ltr">
           <Link href="#fachgebiete" className={styles.btnPrimary}>{texts.cta}</Link>
           <Link href="#lernpfade" className={styles.btnGhost}>
             {texts.ctaSub}
